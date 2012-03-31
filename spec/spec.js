@@ -15,7 +15,8 @@ if(args.length === 0) {
     args = {0: './spec/runner.html'};
 }
 for (var i in args) {
-    address = args[i];
+    var fs = require('fs');
+    address = fs.absolute(args[i]);
     console.log("Loading " + address);
 
     page = new WebPage();
@@ -124,7 +125,7 @@ function filesRecursively(fs, path, files) {
     list.splice(list.indexOf('.'), 1);
     list.splice(list.indexOf('..'), 1);
     for(var i in list){
-        var file = path + '/' + list[i];
+        var file = fs.absolute(path + '/' + list[i]);
         if(fs.isDirectory(file) && file.indexOf('lib') < 0){
             filesRecursively(fs, file, files);
         }else{
