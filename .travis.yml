@@ -1,11 +1,11 @@
-language: javascript
+language: node_js
+
+node_js:
+  - 0.6
 
 before_script:
-  - sudo apt-get install -y build-essential chrpath git-core libssl-dev libfontconfig1-dev
-  - if [ ! -d "./phantomjs" ]; then git clone git://github.com/ariya/phantomjs.git && cd phantomjs ;fi
-  - if [ $(basename $PWD) = "phantomjs" ]; then git checkout 1.5 ;fi
-  - command -v phantomjs > /dev/null || ./build.sh
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
 
 script:
   - phantomjs ./spec/spec.js
-
