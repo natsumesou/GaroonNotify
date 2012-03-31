@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Jasmine Test Runner</title>
+  <link rel="stylesheet" type="text/css" href="./lib/jasmine-1.1.0/jasmine.css">
+</head>
+<body>
+<script type="text/javascript">
+  jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+  jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter());
+  jasmine.getEnv().execute();
+</script>
+</body>
+</html>
