@@ -16,7 +16,7 @@ if(args.length === 0) {
 }
 for (var i in args) {
     var fs = require('fs');
-    address = fs.absolute(args[i]);
+    address = "file://localhost" + fs.absolute(args[i]);
     console.log("Loading " + address);
 
     page = new WebPage();
