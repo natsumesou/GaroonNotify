@@ -6,6 +6,7 @@ var setupPageFn = function(p, k) {
         overloadPageEvaluate(p);
         setupWriteFileFunction(p, k);
         loadLibraries(p);
+        loadFiles(p);
         loadSpecs(p);
     };
 };
@@ -96,9 +97,23 @@ function setupWriteFileFunction(page, key) {
  * @param {phantomjs.WebPage} page The WebPage object to inject functions into.
  */
 function loadLibraries(page) {
+    page.injectJs('./spec/lib/jquery-1.7.2.min.js');
     page.injectJs('./spec/lib/jasmine-1.1.0/jasmine.js');
     page.injectJs('./spec/lib/jasmine-1.1.0/jasmine-html.js');
+    page.injectJs('./spec/lib/mock-ajax.js');
     page.injectJs('./spec/lib/jasmine.junit_reporter.js');
+}
+
+/** Load Testing javascripts
+ *
+ * @param {phantomjs.WebPage} page The WebPage object to inject functions into.
+ */
+//TODO move it to spec_helper.js
+function loadFiles(page) {
+    page.injectJs('./lib/underscore-min.js');
+    page.injectJs('./lib/backbone-min.js');
+    page.injectJs('./init.js');
+    page.injectJs('./models/schedule.js');
 }
 
 /** Load testing files
