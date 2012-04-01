@@ -102,6 +102,8 @@ function loadLibraries(page) {
     page.injectJs('./spec/lib/jasmine-1.1.0/jasmine-html.js');
     page.injectJs('./spec/lib/mock-ajax.js');
     page.injectJs('./spec/lib/jasmine.junit_reporter.js');
+
+    page.injectJs('./spec/mock/schedule.js');
 }
 
 /** Load Testing javascripts
@@ -114,6 +116,7 @@ function loadFiles(page) {
     page.injectJs('./lib/backbone-min.js');
     page.injectJs('./init.js');
     page.injectJs('./models/schedule.js');
+    page.injectJs('./collections/schedule.js');
 }
 
 /** Load testing files

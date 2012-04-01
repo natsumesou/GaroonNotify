@@ -1,0 +1,22 @@
+{
+  "name": "GaroonNotify",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "Garoon v3 schedule notification extension",
+  "icons": {
+      "48": "garoon_48.png",
+      "128": "garoon_128.png"
+  },
+  "browser_action": {
+      "default_icon": "garoon_48.png",
+      "default_popup": "popup.html"
+  },
+  "background": {
+      "page": "background.html"
+  },
+  "permissions": [
+      "notifications",
+      "https://*/*",
+      "http://*/*"
+  ]
+}
