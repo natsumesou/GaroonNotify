@@ -15,5 +15,6 @@
       "notifications",
       "https://*/*",
       "http://*/*"
-  ]
+  ],
+  "update_url": "https://raw.github.com/natsumesou/GaroonNotify/master/update/update.xml"
 }

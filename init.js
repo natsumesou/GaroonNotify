@@ -2,11 +2,10 @@ var garoon = {};
 garoon.Models = {};
 garoon.Collections = {};
 garoon.Views = {};
-garoon.INTERVAL = 60000;
+garoon.INTERVAL = 180000;
 
 $.ajaxSetup({
-    cache: false,
-    global: true
+    cache: false
 });
 
 

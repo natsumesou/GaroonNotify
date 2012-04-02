@@ -28,7 +28,7 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
             _system: 1,
             _notimecard: 1,
             _force_login: 1,
-            use_cookie: 0,
+            use_cookie: -1,
             _account: localStorage['username'],
             _password: localStorage['password']
         };

@@ -1,5 +1,5 @@
 garoon.Models.Schedule = Backbone.Model.extend({
-    notifySpan: 600000, // 10m
+    notifySpan: garoon.INTERVAL * 2,
     isUpcoming: function() {
         var diff = this.get('startdate') - new Date();
         return  0 <= diff && diff <= this.notifySpan;
