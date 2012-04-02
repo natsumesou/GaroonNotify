@@ -21,5 +21,7 @@ garoon.Views.Form = Backbone.View.extend({
         localStorage['username'] = this.username.val();
         localStorage['password'] = this.password.val();
         $(this.el).find('.result').text('saved');
+        garoon.schedule = new garoon.Collections.Schedule();
+        garoon.schedule._fetch();
     }
 });

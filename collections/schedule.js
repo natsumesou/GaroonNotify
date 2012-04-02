@@ -1,7 +1,6 @@
 garoon.Collections.Schedule = Backbone.Collection.extend({
     model: garoon.Models.Schedule,
 
-    url: 'https://' + localStorage['domain'] + '/cgi-bin/cbgrn/grn.cgi/reminder/schedule_notifier',
     parse: function(resp) {
         var schedules = $.xml2json(resp).schedule;
         for(var i in schedules){
@@ -18,10 +17,13 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
     },
 
     task: function(interval) {
+        clearInterval(this.interval);
         this.interval = setInterval($.proxy(this._fetch, this), interval);
     },
 
     _fetch: function(interval){
+        this.url = 'https://' + localStorage['domain'] + '/cgi-bin/cbgrn/grn.cgi/reminder/schedule_notifier';
+
         var params = {
             _system: 1,
             _notimecard: 1,
@@ -130,6 +132,9 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
         if(xhr.status == 200 && xhr.responseText.indexOf('HTML') >= 0){
             text = "set username and password in plugin's popup page.";
             console.info(text);
+        }else if(xhr.status == 0){
+            text = 'domain [' + localStorage['domain'] + '] or username or password is invalid : ' + xhr.statusText;
+            console.error(text);
         }else{
             console.error(text);
         }
