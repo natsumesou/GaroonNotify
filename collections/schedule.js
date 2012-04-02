@@ -121,7 +121,7 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
         var notification = webkitNotifications.createNotification(
             '',  // icon url
             title,
-            schedule.get('startdate')
+            schedule.get('startdate') + "\n" + schedule.get('facility')
         );
         notification.show();
     },
