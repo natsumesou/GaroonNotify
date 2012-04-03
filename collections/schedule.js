@@ -29,15 +29,17 @@ schedules[i].id = RegExp.$1
     },
 
     _fetch: function(interval){
-        this.url = 'https://' + localStorage['domain'] + '/cgi-bin/cbgrn/grn.cgi/reminder/schedule_notifier';
+        var storage = new garoon.Models.Storage();
+        storage.load();
+        this.url = 'https://' + storage.domain() + '/cgi-bin/cbgrn/grn.cgi/reminder/schedule_notifier';
 
         var params = {
             _system: 1,
             _notimecard: 1,
             _force_login: 1,
             use_cookie: -1,
-            _account: localStorage['username'],
-            _password: localStorage['password']
+            _account: storage.username(),
+            _password: storage.password()
         };
         this.fetch({
             dataType: 'xml',
@@ -83,16 +85,15 @@ schedules[i].id = RegExp.$1
     },
 
     update: function(schedules) {
-        var localSchedules = localStorage['schedules'];
-        if(localSchedules !== undefined){
-            var oldSchedules = new garoon.Collections.Schedule(JSON.parse(localSchedules));
-            schedules.each(function(schedule){
-                if(oldSchedules.hasSameSchedule(schedule)){
-                    var oldSchedule = oldSchedules.getSameSchedule(schedule);
-                    schedule.update(oldSchedule);
-                }
-            });
-        }
+        var storage = new garoon.Models.Storage();
+        storage.load();
+        var oldSchedules = new garoon.Collections.Schedule(storage.schedules());
+        schedules.each(function(schedule){
+            if(oldSchedules.hasSameSchedule(schedule)){
+                var oldSchedule = oldSchedules.getSameSchedule(schedule);
+                schedule.update(oldSchedule);
+            }
+        });
 
         schedules = this.clearPastSchedules(schedules);
         return schedules;
@@ -113,7 +114,10 @@ schedules[i].id = RegExp.$1
                 schedules.desktopNotification(schedule);
             }
         });
-        localStorage['schedules'] = JSON.stringify(schedules.toJSON());
+        var storage = new garoon.Models.Storage();
+        storage.load();
+        storage.schedules(schedules);
+        storage.save();
     },
 
     desktopNotification: function(schedule) {
@@ -134,13 +138,14 @@ schedules[i].id = RegExp.$1
     },
 
     errorNotification: function(collection, xhr, status){
+        var storage = new garoon.Models.Storage();
         var text = xhr.status+":"+xhr.statusText+"\nresponse text: "+xhr.responseText.slice(0, 30)+'...';
 
         if(xhr.status == 200 && xhr.responseText.indexOf('HTML') >= 0){
             text = "set username and password in plugin's popup page.";
             console.info(text);
         }else if(xhr.status == 0){
-            text = 'domain [' + localStorage['domain'] + '] or username or password is invalid : ' + xhr.statusText;
+            text = 'domain [' + storage.domain() + '] or username or password is invalid : ' + xhr.statusText;
             console.error(text);
         }else{
             console.error(text);

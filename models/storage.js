@@ -1,6 +1,6 @@
 garoon.Models.Storage = Backbone.Model.extend({
     load: function() {
-        var string = this.get('schedules');
+        var string = localStorage['schedules'];
         var schedules = [];
         if(string !== undefined){
             schedules = JSON.parse(string);
