@@ -1,6 +1,6 @@
 garoon.Collections.Schedule = Backbone.Collection.extend({
+    url: 'http://products.cybozu.co.jp/garoon/', //DUMMY URL
     model: garoon.Models.Schedule,
-
     parse: function(resp) {
         var schedules = $.xml2json(resp).schedule;
         if(schedules.length === undefined){
