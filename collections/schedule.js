@@ -3,9 +3,16 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
 
     parse: function(resp) {
         var schedules = $.xml2json(resp).schedule;
+        if(schedules.length === undefined){
+            schedules = [schedules];
+        }
         for(var i in schedules){
-            if(schedules[i].id.match(/(^schedule:[0-9]*):.*/i)){
-                schedules[i].id = RegExp.$1
+            if(schedules[i].id !== undefined){
+                if(schedules[i].id.match(/(^schedule:[0-9]*):.*/i)){
+schedules[i].id = RegExp.$1
+                }
+            }else{
+                schedules[i].id = new Date().getTime();
             }
             schedules[i].enddate = new Date(schedules[i].enddate);
             schedules[i].startdate = new Date(schedules[i].startdate);
@@ -28,7 +35,7 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
             _system: 1,
             _notimecard: 1,
             _force_login: 1,
-            use_cookie: 0,
+            use_cookie: -1,
             _account: localStorage['username'],
             _password: localStorage['password']
         };
@@ -121,7 +128,7 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
         var notification = webkitNotifications.createNotification(
             '',  // icon url
             title,
-            schedule.get('startdate')
+            schedule.get('startdate') + "\n" + schedule.get('facility')
         );
         notification.show();
     },

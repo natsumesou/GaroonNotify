@@ -5,6 +5,7 @@
         <updated>2012-04-01 13:16:44</updated>
         <title>test</title>
         <memo></memo>
+        <facility>4-3</facility>
         <link>https://test.jp/cgi-bin/cbgrn/grn.cgi/schedule/view?event=2&amp;nid=1#follow</link>
         <startdate>2012-04-01 13:30:00</startdate>
         <enddate>2012-04-01 23:45:00</enddate>
@@ -14,6 +15,7 @@
         <id>schedule:213195:2012-04-02 14:00:00</id>
         <updated>2012-03-30 12:44:41</updated>
         <title>title MTG</title>
+        <facility>4-1</facility>
         <memo>MTGです。
         </memo>
         <link>https://test.jp/cgi-bin/cbgrn/grn.cgi/schedule/view?event=1&amp;nid=1#follow</link>
