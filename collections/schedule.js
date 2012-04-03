@@ -4,8 +4,12 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
     parse: function(resp) {
         var schedules = $.xml2json(resp).schedule;
         for(var i in schedules){
-            if(schedules[i].id.match(/(^schedule:[0-9]*):.*/i)){
-                schedules[i].id = RegExp.$1
+            if(schedules[i].id !== undefined){
+                if(schedules[i].id.match(/(^schedule:[0-9]*):.*/i)){
+schedules[i].id = RegExp.$1
+                }
+            }else{
+                schedules[i].id = new Date().getTime();
             }
             schedules[i].enddate = new Date(schedules[i].enddate);
             schedules[i].startdate = new Date(schedules[i].startdate);
