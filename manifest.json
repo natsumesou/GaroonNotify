@@ -1,6 +1,6 @@
 {
   "name": "GaroonNotify",
-  "version": "0.5",
+  "version": "0.6",
   "description": "Garoon v3 schedule notification extension",
   "icons": {
       "48": "images/garoon_48.png",
