@@ -51,10 +51,14 @@ schedules[i].id = RegExp.$1
     },
 
     clearPastSchedules: function(schedules) {
+        var oldSchedules = new garoon.Collections.Schedule();
         schedules.each(function(schedule){
             if(schedule.isPast()){
-                schedules.remove(schedule);
+                oldSchedules.add(schedule);
             }
+        });
+        oldSchedules.each(function(schedule) {
+            schedules.remove(schedule);
         });
 
         return schedules;

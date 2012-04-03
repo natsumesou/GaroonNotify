@@ -19,5 +19,7 @@ garoon.Models.Schedule = Backbone.Model.extend({
             new: schedule.get('new'),
             isUpcomingNotified: schedule.get('isUpcomingNotified')
         });
+
+        return this;
     }
 });

@@ -1,46 +1,61 @@
 garoon.Models.Storage = Backbone.Model.extend({
     load: function() {
-        var string = localStorage['schedules'];
+        var string = window.localStorage['schedules'];
         var schedules = [];
         if(string !== undefined){
-            schedules = JSON.parse(string);
+            try{
+                schedules = JSON.parse(string);
+            }catch(error){
+                schedules = new garoon.Collections.Schedule();
+                console.warn("WARN: load schedules from localStorage is not formatted: %s", string);
+                console.warn(error);
+            }
         }
         this.set({
-            domain: localStorage['domain'],
-            username: localStorage['username'],
-            password: localStorage['password'],
+            domain: window.localStorage['domain'],
+            username: window.localStorage['username'],
+            password: window.localStorage['password'],
             schedules: schedules
         });
+
+        return this;
     },
+
     save: function() {
-        localStorage['domain'] = this.get('domain');
-        localStorage['username'] = this.get('username');
-        localStorage['password'] = this.get('password');
+        window.localStorage['domain'] = this.get('domain');
+        window.localStorage['username'] = this.get('username');
+        window.localStorage['password'] = this.get('password');
         var schedules = this.get('schedules');
         if(typeof schedules === 'object'){
-            localStorage['schedules'] = JSON.stringify(schedules);
+            window.localStorage['schedules'] = JSON.stringify(schedules);
         }else{
-            localStorage['schedules'] = schedules;
+            window.localStorage['schedules'] = schedules;
         }
+
+        return this;
     },
+
     schedules: function(schedules) {
         if(schedules !== undefined){
             this.set({schedules: schedules});
         }
         return this.get('schedules');
     },
+
     domain: function(domain) {
         if(domain !== undefined){
             this.set({domain: domain});
         }
         return this.get('domain');
     },
+
     username: function(username) {
         if(username !== undefined){
             this.set({username: username});
         }
         return this.get('username');
     },
+
     password: function(password) {
         if(password !== undefined){
             this.set({password: password});
