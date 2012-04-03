@@ -3,6 +3,9 @@ garoon.Collections.Schedule = Backbone.Collection.extend({
 
     parse: function(resp) {
         var schedules = $.xml2json(resp).schedule;
+        if(schedules.length === undefined){
+            schedules = [schedules];
+        }
         for(var i in schedules){
             if(schedules[i].id !== undefined){
                 if(schedules[i].id.match(/(^schedule:[0-9]*):.*/i)){
