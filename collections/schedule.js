@@ -14,9 +14,9 @@ schedules[i].id = RegExp.$1
             }else{
                 schedules[i].id = new Date().getTime();
             }
-            schedules[i].enddate = new Date(schedules[i].enddate);
-            schedules[i].startdate = new Date(schedules[i].startdate);
-            schedules[i].updated = new Date(schedules[i].updated);
+            schedules[i].enddate = new Date(schedules[i].enddate.replace('-', '/'));
+            schedules[i].startdate = new Date(schedules[i].startdate.replace('-', '/'));
+            schedules[i].updated = new Date(schedules[i].updated.replace('-', '/'));
             schedules[i].new = true;
             schedules[i].isUpcomingNotified = false;
         }

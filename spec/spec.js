@@ -5,9 +5,9 @@ var setupPageFn = function(p, k) {
     return function() {
         overloadPageEvaluate(p);
         setupWriteFileFunction(p, k);
-        loadLibraries(p);
-        loadFiles(p);
-        loadSpecs(p);
+        //loadLibraries(p);
+        //loadFiles(p);
+        //loadSpecs(p);
     };
 };
 

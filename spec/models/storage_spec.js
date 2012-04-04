@@ -66,7 +66,7 @@ describe("garoon.Models.Storage", function() {
 
     describe("load", function(){
         beforeEach(function() {
-            window.localStorage['domain'] = 'test'
+            Storage['domain'] = 'test'
             storage = new garoon.Models.Storage();
         });
 
@@ -83,11 +83,11 @@ describe("garoon.Models.Storage", function() {
         it("data to loadStorage", function() {
             storage.domain('hoge.jp');
             storage.save();
-            expect(window.localStorage['domain']).toBe('hoge.jp');
+            expect(Storage['domain']).toBe('hoge.jp');
         });
     });
 
     afterEach(function() {
-        window.localStorage['domain'] = '';
+        Storage['domain'] = undefined;
     });
 });

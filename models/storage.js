@@ -1,20 +1,10 @@
 garoon.Models.Storage = Backbone.Model.extend({
     load: function() {
-        var string = window.localStorage['schedules'];
-        var schedules = [];
-        if(string !== undefined){
-            try{
-                schedules = JSON.parse(string);
-            }catch(error){
-                schedules = new garoon.Collections.Schedule();
-                console.warn("WARN: load schedules from localStorage is not formatted: %s", string);
-                console.warn(error);
-            }
-        }
+        var schedules = Storage['schedules'] || new garoon.Collections.Schedule();
         this.set({
-            domain: window.localStorage['domain'],
-            username: window.localStorage['username'],
-            password: window.localStorage['password'],
+            domain: Storage['domain'],
+            username: Storage['username'],
+            password: Storage['password'],
             schedules: schedules
         });
 
@@ -22,15 +12,10 @@ garoon.Models.Storage = Backbone.Model.extend({
     },
 
     save: function() {
-        window.localStorage['domain'] = this.get('domain');
-        window.localStorage['username'] = this.get('username');
-        window.localStorage['password'] = this.get('password');
-        var schedules = this.get('schedules');
-        if(typeof schedules === 'object'){
-            window.localStorage['schedules'] = JSON.stringify(schedules);
-        }else{
-            window.localStorage['schedules'] = schedules;
-        }
+        Storage['domain'] = this.get('domain');
+        Storage['username'] = this.get('username');
+        Storage['password'] = this.get('password');
+        Storage['schedules'] = this.get('schedules');
 
         return this;
     },

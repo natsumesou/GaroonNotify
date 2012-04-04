@@ -51,10 +51,12 @@ describe("garoon.Collections.Schedule", function() {
     });
 
     describe("clearPastSchedules", function() {
-        var schedule;
         beforeEach(function() {
-            schedule = new garoon.Models.Schedule({startdate: new Date("3000-04-01 13:30:00")});
+            schedules = new garoon.Collections.Schedule();
+            var schedule = new garoon.Models.Schedule({startdate: new Date("3000/04/01 13:30:00")});
             schedules.add(schedule);
+            var oldSchedule = new garoon.Models.Schedule({startdate: new Date("2000/04/01 13:30:00")});
+            schedules.add(oldSchedule);
         });
         it("delete old schedules", function() {
             expect(schedules.clearPastSchedules(schedules).length).toBe(1);
